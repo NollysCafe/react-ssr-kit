@@ -1,0 +1,19 @@
+# Node
+node_modules/
+dist/
+.env
+.env.*
+*.log
+
+# Vite
+.vite/
+
+# IDEs
+.vscode/
+*.sw?
+
+# Logs
+pnpm-debug.log*
+
+# Misc
+*.tsbuildinfo
