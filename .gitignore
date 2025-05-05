@@ -17,3 +17,4 @@ pnpm-debug.log*
 
 # Misc
 *.tsbuildinfo
+pnpm-lock.yaml
