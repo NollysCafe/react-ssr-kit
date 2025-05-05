@@ -2,17 +2,20 @@
 	"name": "react-ssr-kit",
 	"version": "0.1.0",
 	"license": "NFE-OSL v1.0",
+	"private": true,
+	"engines": {
+		"node": ">=18.0.0"
+	},
 	"workspaces": [
 		"backend",
 		"frontend",
 		"shared"
 	],
-	"engines": {
-		"node": ">=18.0.0"
-	},
 	"scripts": {
-		"dev": "pnpm --filter backend dev",
-		"build": "pnpm --recursive build",
-		"start": "pnpm --filter backend start"
+		"dev": "pnpm -r --parallel dev",
+		"build": "pnpm -r --parallel build",
+		"preview": "pnpm --filter frontend preview",
+		"start": "pnpm --filter backend start",
+		"clean": "rm -rf backend/dist frontend/dist"
 	}
 }
