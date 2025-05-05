@@ -9,6 +9,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import session from './middlewares/session'
+import ssr from './middlewares/ssr'
 
 import { loadRoutesFrom } from './utils/loadRoutes'
 import path from 'path'
@@ -16,6 +17,10 @@ import path from 'path'
 
 // Create App instance
 const app = new App()
+
+// ROUTES
+const routes = loadRoutesFrom(path.resolve(__dirname, 'routes'))
+routes.forEach(({ path, router }) => app.addRoute(path, router))
 
 // MIDDLEWARES
 app.addMiddleware(bodyParser.json())
@@ -26,10 +31,7 @@ app.addMiddleware(cors({ credentials: true }))
 app.addMiddleware(helmet())
 app.addMiddleware(morgan('dev'))
 app.addMiddleware(session)
-
-// ROUTES
-const routes = loadRoutesFrom(path.resolve(__dirname, 'routes'))
-routes.forEach(({ path, router }) => app.addRoute(path, router))
+app.addMiddleware(ssr)
 
 // Start server
 app.start(config.backendPort, async () => {
